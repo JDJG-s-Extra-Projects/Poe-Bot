@@ -81,7 +81,7 @@ class Ai(commands.Cog):
             pages = pag.pages
 
             for page in pages:
-                await interaction.followup.send(content=page)
+                await interaction.followup.send(content=page, ephemeral=True)
 
             view.message = await interaction.followup.send(content="Would you would like to ask another question?", ephemeral=True)
 
