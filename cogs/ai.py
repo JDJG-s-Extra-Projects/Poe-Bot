@@ -64,8 +64,8 @@ class Ai(commands.Cog):
 
         return await asyncio.to_thread(self.ask, bot, question)
     
-    class ServiceAsk(ui.Modal, title='Questionnaire Response'):
-        question = ui.TextInput(label='Ask your Question')
+    class ServiceAsk(ui.Modal, title="Questionnaire Response"):
+        question = ui.TextInput(label="Ask your Question")
 
         async def on_submit(self, interaction: discord.Interaction):
             await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
@@ -83,11 +83,10 @@ class Ai(commands.Cog):
             for page in pages:
                 await interaction.followup.send(content=page, ephemeral=True)
 
+            view = utils.Confirm(interaction.user)
+            view.modal = self.child
             view.message = await interaction.followup.send(content="Would you would like to ask another question?", ephemeral=True)
-
-            # add buttons in a bit to confirm or deny
-
-            # view.message is to get the message for the view to be able to edit
+            
     
     @app_commands.command(description="Talk to AI", name="talk")
     async def talk(self, interaction : discord.Interaction, bot: typing.Optional[str]):
@@ -104,6 +103,10 @@ class Ai(commands.Cog):
         modal = self.ServiceAsk()
         modal.ai_client = self.ask_question
         modal.service = bot
+
+        modal_copy = modal
+
+        modal.child = modal_copy
 
         await interaction.response.send_modal(modal)
 
