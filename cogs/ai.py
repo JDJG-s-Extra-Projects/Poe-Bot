@@ -87,7 +87,7 @@ class Ai(commands.Cog):
 
             view = utils.Confirm(interaction.user)
             view.modal = self.child
-            view.message = await interaction.followup.send(content="Would you would like to ask another question?", ephemeral=True)
+            view.message = await interaction.followup.send(content="Would you would like to ask another question?", view=view, ephemeral=True)
             
     
     @app_commands.command(description="Talk to AI", name="talk")
