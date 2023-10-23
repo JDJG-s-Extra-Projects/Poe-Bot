@@ -67,7 +67,7 @@ class Ai(commands.Cog):
         return await asyncio.to_thread(self.ask, bot, question)
     
     class ServiceAsk(ui.Modal, title="Questionnaire Response"):
-        question = ui.TextInput(label="Ask your Question", discord.TextStyle.paragraph)
+        question = ui.TextInput(label="Ask your Question", style=discord.TextStyle.paragraph)
 
         async def on_submit(self, interaction: discord.Interaction):
             await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
