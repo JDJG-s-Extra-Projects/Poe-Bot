@@ -42,7 +42,7 @@ class Ai(commands.Cog):
             )
         )
 
-        return (free_bots, loose_bots, resticted_bots)
+        return (free_bots, loose_bots, restricted_bots)
 
     async def cog_load(self):
         self.free_bots, self.loose_bots, self.restricted_bots = await asyncio.to_thread(self.grab_names)
