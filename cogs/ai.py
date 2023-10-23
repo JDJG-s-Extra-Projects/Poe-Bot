@@ -95,11 +95,11 @@ class Ai(commands.Cog):
         bots = self.free_bots
 
         if not bot:
-            return await interaction.send_response(content=f"Please choose a bot")
+            return await interaction.response.send_message(content=f"Please choose a bot")
 
         if bot not in bots:
 
-            return await interaction.send_response(content=f"The bot you looked up was not found")
+            return await interaction.response.send_message(content=f"The bot you looked up was not found")
 
         modal = self.ServiceAsk()
         modal.ai_client = self.ask_question
