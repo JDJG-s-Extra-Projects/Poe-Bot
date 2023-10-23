@@ -3,6 +3,7 @@ import asyncio
 import discord
 from discord import app_commands
 from discord.app_commands import Choice
+from discord.ext import commands
 from discord import ui
 
 from poe_api_wrapper import PoeApi, api
