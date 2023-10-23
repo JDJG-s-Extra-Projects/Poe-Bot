@@ -101,7 +101,7 @@ class Ai(commands.Cog):
 
             return await interaction.send_response(content=f"The bot you looked up was not found")
 
-        modal = self.ServiceAsk
+        modal = self.ServiceAsk()
         modal.ai_client = self.ask_question
         modal.service = bot
 
