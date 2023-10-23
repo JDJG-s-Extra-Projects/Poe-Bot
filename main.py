@@ -26,4 +26,11 @@ load_dotenv()
 
 bot = ApiBot(command_prefix=commands.when_mentioned_or("a$"), intents=discord.Intents.all())
 
+@bot.event
+async def on_ready():
+
+    print(bot.user)
+    print(bot.user.id)
+    print("Bot Booted up properly :)")
+
 bot.run(os.environ["TOKEN"])
