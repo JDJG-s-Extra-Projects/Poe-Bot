@@ -1,4 +1,5 @@
 import os
+import sys
 import traceback
 from typing import Any
 
@@ -21,6 +22,16 @@ class ApiBot(commands.Bot):
 
             await self.load_extension("jishaku")
 
+    
+    async def on_error(self, event, *args: Any, **kwargs: Any) -> None:
+        more_information = sys.exc_info()
+        error_wanted = traceback.format_exc()
+        traceback.print_exc()
+
+        # print(event)
+        # print(more_information[0])
+        # print(args)
+        # print(kwargs)
 
 load_dotenv()
 # something cool is that you can pass filenames into here.
