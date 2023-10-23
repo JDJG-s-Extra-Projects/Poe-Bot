@@ -92,11 +92,14 @@ class Ai(commands.Cog):
     @app_commands.command(description="Talk to AI", name="talk")
     async def talk(self, interaction : discord.Interaction, bot: typing.Optional[str]):
 
-        bots = self.bot.free_bots
+        bots = self.free_bots
+
+        if not bot:
+            return await interaction.send_response(content=f"Please choose a bot")
 
         if bot not in bots:
 
-            await interaction.send_response(content=f"The bot you looked up was not found")
+            return await interaction.send_response(content=f"The bot you looked up was not found")
 
         modal = self.ServiceAsk
         modal.ai_client = self.ask_question
@@ -108,7 +111,7 @@ class Ai(commands.Cog):
     @talk.autocomplete("bot")
     async def autocomplete_callback(self, interaction: discord.Interaction, current: str):
 
-        bots = self.bot.free_bots
+        bots = self.free_bots
 
         all_choices = [Choice(name=bot, value=bot) for bot in bots]
         startswith = [choices for choices in all_choices if choices.name.startswith(current)]
