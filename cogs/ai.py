@@ -54,7 +54,7 @@ class Ai(commands.Cog):
     
     def ask(self, service, question):
 
-        resp = client.send_message(service, question)
+        resp = self.client.send_message(service, question)
 
         # this chunked therefore it will not be put together with commands.Paginator
 
