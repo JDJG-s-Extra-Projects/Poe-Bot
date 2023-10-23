@@ -62,7 +62,7 @@ class Ai(commands.Cog):
     
     async def ask_question(self, bot, question):
 
-        return await asyncio.to_thread(self.ask)
+        return await asyncio.to_thread(self.ask, bot, question)
     
     class ServiceAsk(ui.Modal, title='Questionnaire Response'):
         question = ui.TextInput(label='Ask your Question')
@@ -70,7 +70,7 @@ class Ai(commands.Cog):
         async def on_submit(self, interaction: discord.Interaction):
             await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
 
-            chunks = await self.ai_client(self, self.service, self.question)
+            chunks = await self.ai_client(self.service, self.question)
 
             pag = commands.Paginator(prefix="", suffix="")
 
