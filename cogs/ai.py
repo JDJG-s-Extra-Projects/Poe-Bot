@@ -81,9 +81,9 @@ class Ai(commands.Cog):
             pages = pag.pages
 
             for page in pages:
-                await interaction.response.followup(content=page)
+                await interaction.followup(content=page)
 
-            view.message = await interaction.response.followup(content="Would you would like to ask another question?", ephemeral=True)
+            view.message = await interaction.followup(content="Would you would like to ask another question?", ephemeral=True)
 
             # add buttons in a bit to confirm or deny
 
