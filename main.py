@@ -23,6 +23,7 @@ class ApiBot(commands.Bot):
 
 
 load_dotenv()
+# something cool is that you can pass filenames into here.
 
 bot = ApiBot(command_prefix=commands.when_mentioned_or("a$"), intents=discord.Intents.all())
 
