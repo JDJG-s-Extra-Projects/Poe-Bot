@@ -70,7 +70,7 @@ class Ai(commands.Cog):
         async def on_submit(self, interaction: discord.Interaction):
             await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
 
-            chunks = await self.ai_client(self.service, self.question)
+            chunks = await self.ai_client(self.service, self.question.value)
 
             pag = commands.Paginator(prefix="", suffix="")
 
