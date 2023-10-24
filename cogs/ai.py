@@ -70,7 +70,10 @@ class Ai(commands.Cog):
         question = ui.TextInput(label="Ask your Question", style=discord.TextStyle.paragraph)
 
         def __init__(self, ask_question, ai_client, child, **kwargs):
-
+            
+            self.ai_client = ai_client
+            self.service = ask_question
+            
             self.args = (ask_question, ai_client, child)
             self.child = child
 
