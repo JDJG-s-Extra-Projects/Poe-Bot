@@ -1,5 +1,8 @@
 import discord
 
+from discord import ui
+from discord.ext import commands
+
 class Confirm(discord.ui.View):
     def __init__(self, user, modal):
         super().__init__()
@@ -32,3 +35,39 @@ class Confirm(discord.ui.View):
 
         else:
             return True
+        
+
+class ServiceAsk(ui.Modal, title="Questionnaire Response"):
+    question = ui.TextInput(label="Ask your Question", style=discord.TextStyle.paragraph)
+
+    def __init__(self, ask_question, ai_client, child, **kwargs):
+            
+        self.ai_client = ai_client
+        self.service = ask_question
+
+        self.args = (ask_question, ai_client, child)
+        self.child = child
+
+        super().__init__(**kwargs)
+
+    async def on_submit(self, interaction: discord.Interaction):
+        await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
+
+        chunks = await self.ai_client(self.service, self.question.value)
+
+        pag = commands.Paginator(prefix="", suffix="")
+
+        for chunk in chunks:
+            pag.add_line(chunk["response"])
+
+            
+        pages = pag.pages
+
+        for page in pages:
+            await interaction.followup.send(content=page, ephemeral=True)
+
+            
+        modal = self.child(*self.args)
+        view = utils.Confirm(interaction.user, modal)
+
+        view.message = await interaction.followup.send(content="Would you would like to ask another question?", view=view, ephemeral=True)
