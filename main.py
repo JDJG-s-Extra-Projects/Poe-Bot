@@ -33,19 +33,17 @@ class ApiBot(commands.Bot):
         # print(args)
         # print(kwargs)
 
+    async def on_ready(self):
+
+        print(self.user)
+        print(self.user.id)
+        print("Bot Booted up properly :)")
+
+
 
 load_dotenv()
 # something cool is that you can pass filenames into here.
 
 bot = ApiBot(command_prefix=commands.when_mentioned_or("a$"), intents=discord.Intents.all())
-
-
-@bot.event
-async def on_ready():
-
-    print(bot.user)
-    print(bot.user.id)
-    print("Bot Booted up properly :)")
-
 
 bot.run(os.environ["TOKEN"])
