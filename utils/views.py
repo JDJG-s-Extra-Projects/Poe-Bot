@@ -1,15 +1,16 @@
 import discord
 
 class Confirm(discord.ui.View):
-    def __init__(self, user):
+    def __init__(self, user, modal):
         super().__init__()
         self.user = user
+        self.modal = modal
     
     @discord.ui.button(label='Confirm', style=discord.ButtonStyle.green)
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
 
         modal = self.modal
-        modal.child = self.modal_copy
+        modal.child = self.modal
 
         await interaction.response.send_modal(modal)
         
