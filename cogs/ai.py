@@ -73,7 +73,7 @@ class Ai(commands.Cog):
             
             self.ai_client = ai_client
             self.service = ask_question
-            
+
             self.args = (ask_question, ai_client, child)
             self.child = child
 
@@ -115,7 +115,7 @@ class Ai(commands.Cog):
             return await interaction.response.send_message(content=f"The bot you looked up was not found")
 
         
-        modal = self.ServiceAsk(self.ask_question, bot, self.ServiceAsk)
+        modal = self.ServiceAsk(bot, self.ask_question, self.ServiceAsk)
 
         await interaction.response.send_modal(modal)
 
