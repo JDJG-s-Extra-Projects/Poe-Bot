@@ -51,7 +51,7 @@ class ServiceAsk(ui.Modal, title="Questionnaire Response"):
         super().__init__(**kwargs)
 
     async def on_submit(self, interaction: discord.Interaction):
-        await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
+        await interaction.response.send_message("Thank You now sending the response to the ai.", ephemeral=True)
 
         chunks = await self.ai_client(self.service, self.question.value)
 

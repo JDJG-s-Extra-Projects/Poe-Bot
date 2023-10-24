@@ -17,7 +17,7 @@ class ApiBot(commands.Bot):
     async def setup_hook(self) -> None:
         for cog in EXTENSIONS:
             try:
-                await self.load_extension(f"{cog}")
+                await self.load_extension(cog)
             except commands.errors.ExtensionError:
                 traceback.print_exc()
 
