@@ -19,7 +19,7 @@ class Confirm(discord.ui.View):
         await interaction.response.send_message("I will stop the response for you", ephemeral=True)
     
     async def on_timeout(self):
-        await self.message.edit("you took too long", view=None)
+        await self.message.edit(content="you took too long", view=None)
 
     async def interaction_check(self, interaction):
 
