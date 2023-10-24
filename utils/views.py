@@ -9,7 +9,7 @@ class Confirm(discord.ui.View):
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
 
         modal = self.modal
-        modal.child = self.modal.child
+        modal.child = self.modal_copy
 
         await interaction.response.send_modal(modal)
         
