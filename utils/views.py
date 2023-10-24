@@ -10,16 +10,16 @@ class Confirm(discord.ui.View):
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
 
         modal = self.modal.child(*self.modal.args)
-
-        await interaction.edit_original_response(view=None)
         await interaction.response.send_modal(modal)
+
+        # edit message to remove the buttons
 
     # This one is similar to the confirmation button except sets the inner value to `False`
     @discord.ui.button(label='Cancel', style=discord.ButtonStyle.grey)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
-
-        await interaction.edit_original_response(view=None)
         await interaction.response.send_message("I will stop the response for you", ephemeral=True)
+        
+        # edit message to remove the buttons
     
     async def on_timeout(self):
         await self.message.edit(content="you took too long", view=None)
