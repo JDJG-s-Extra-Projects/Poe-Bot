@@ -69,6 +69,13 @@ class Ai(commands.Cog):
     class ServiceAsk(ui.Modal, title="Questionnaire Response"):
         question = ui.TextInput(label="Ask your Question", style=discord.TextStyle.paragraph)
 
+        def __init__(self, ask_question, ai_client, child, **kwargs):
+
+            self.args = (ask_question, ai_client, child)
+            self.child = child
+
+            super().__init__(**kwargs)
+
         async def on_submit(self, interaction: discord.Interaction):
             await interaction.response.send_message(f"Thank You now sending the response to the ai.", ephemeral=True)
 
@@ -85,8 +92,10 @@ class Ai(commands.Cog):
             for page in pages:
                 await interaction.followup.send(content=page, ephemeral=True)
 
-            modal = self.child
+            
+            modal = self.child(self.args)
             view = utils.Confirm(interaction.user, modal)
+
             view.message = await interaction.followup.send(content="Would you would like to ask another question?", view=view, ephemeral=True)
             
     
@@ -102,14 +111,8 @@ class Ai(commands.Cog):
 
             return await interaction.response.send_message(content=f"The bot you looked up was not found")
 
-        modal = self.ServiceAsk()
-        modal.ai_client = self.ask_question
-        modal.service = bot
-
-        modal_copy = self.ServiceAsk()
-        modal_copy.ai_client = self.ask_question
-        modal_copy.service = bot
-        modal.child = modal_copy
+        
+        modal = self.ServiceAsk(self.ask_question, bot, self.ServiceAsk)
 
         await interaction.response.send_modal(modal)
 

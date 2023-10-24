@@ -9,8 +9,7 @@ class Confirm(discord.ui.View):
     @discord.ui.button(label='Confirm', style=discord.ButtonStyle.green)
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
 
-        modal = self.modal
-        modal.child = self.modal
+        modal = self.modal.child(modal.args)
 
         await interaction.response.send_modal(modal)
         
