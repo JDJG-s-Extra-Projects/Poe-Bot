@@ -85,6 +85,7 @@ class Ai(commands.Cog):
             for page in pages:
                 await interaction.followup.send(content=page, ephemeral=True)
 
+            modal = self.child
             view = utils.Confirm(interaction.user, modal)
             view.message = await interaction.followup.send(content="Would you would like to ask another question?", view=view, ephemeral=True)
             
