@@ -66,7 +66,7 @@ class ServiceAsk(ui.Modal, title="Questionnaire Response"):
             await interaction.followup.send(content=page, ephemeral=True)
 
         modal = self.child(*self.args)
-        view = utils.Confirm(interaction.user, modal)
+        view = Confirm(interaction.user, modal)
 
         view.message = await interaction.followup.send(
             content="Would you would like to ask another question?", view=view, ephemeral=True
