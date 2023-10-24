@@ -1,13 +1,11 @@
 import asyncio
-import typing
 import os
+import typing
 
 import discord
-from discord import app_commands
+from discord import app_commands, ui
 from discord.app_commands import Choice
 from discord.ext import commands
-from discord import ui
-
 from poe_api_wrapper import PoeApi, api
 
 import utils
@@ -53,7 +51,6 @@ class Ai(commands.Cog):
         return
         # use for later.
 
-    
     def ask(self, service, question):
 
         resp = self.client.send_message(service, question)
@@ -61,13 +58,13 @@ class Ai(commands.Cog):
         # this chunked therefore it will not be put together with commands.Paginator
 
         return resp
-    
+
     async def ask_question(self, bot, question):
 
         return await asyncio.to_thread(self.ask, bot, question)
-    
+
     @app_commands.command(description="Talk to AI", name="talk")
-    async def talk(self, interaction : discord.Interaction, bot: typing.Optional[str]):
+    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str]):
 
         bots = self.free_bots
 
@@ -78,12 +75,10 @@ class Ai(commands.Cog):
 
             return await interaction.response.send_message(content=f"The bot you looked up was not found")
 
-        
         modal = utils.ServiceAsk(bot, self.ask_question, utils.ServiceAsk)
 
         await interaction.response.send_modal(modal)
 
-    
     @talk.autocomplete("bot")
     async def autocomplete_callback(self, interaction: discord.Interaction, current: str):
 

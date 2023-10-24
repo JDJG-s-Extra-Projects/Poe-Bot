@@ -4,9 +4,10 @@ import traceback
 from typing import Any
 
 import discord
-from cogs import EXTENSIONS
 from discord.ext import commands
 from dotenv import load_dotenv
+
+from cogs import EXTENSIONS
 
 
 class ApiBot(commands.Bot):
@@ -22,7 +23,6 @@ class ApiBot(commands.Bot):
 
             await self.load_extension("jishaku")
 
-    
     async def on_error(self, event, *args: Any, **kwargs: Any) -> None:
         more_information = sys.exc_info()
         error_wanted = traceback.format_exc()
@@ -33,10 +33,12 @@ class ApiBot(commands.Bot):
         # print(args)
         # print(kwargs)
 
+
 load_dotenv()
 # something cool is that you can pass filenames into here.
 
 bot = ApiBot(command_prefix=commands.when_mentioned_or("a$"), intents=discord.Intents.all())
+
 
 @bot.event
 async def on_ready():
@@ -44,5 +46,6 @@ async def on_ready():
     print(bot.user)
     print(bot.user.id)
     print("Bot Booted up properly :)")
+
 
 bot.run(os.environ["TOKEN"])
