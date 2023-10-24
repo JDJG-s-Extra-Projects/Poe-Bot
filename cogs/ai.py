@@ -106,8 +106,9 @@ class Ai(commands.Cog):
         modal.ai_client = self.ask_question
         modal.service = bot
 
-        modal_copy = modal
-
+        modal_copy = self.ServiceAsk()
+        modal_copy.ai_client = self.ask_question
+        modal_copy.service = bot
         modal.child = modal_copy
 
         await interaction.response.send_modal(modal)
