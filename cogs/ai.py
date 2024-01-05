@@ -68,7 +68,9 @@ class Ai(commands.Cog):
         
         print(private)
         bots = self.free_bots
-        private = private or True
+        if private is None:
+            private = True
+            print("changed it for you boss.")
 
         if not bot:
             return await interaction.response.send_message(content="Please choose a bot", ephemeral=True)
