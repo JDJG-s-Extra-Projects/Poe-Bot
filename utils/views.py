@@ -13,14 +13,14 @@ class Confirm(discord.ui.View):
     async def confirm(self, interaction: discord.Interaction, button: discord.ui.Button):
 
         modal = self.modal.child(*self.modal.args)
-        await self.message.edit("Will Countie", view=None)
+        await self.message.edit(content="Will Countie", view=None)
         await interaction.response.send_modal(modal)
 
     # This one is similar to the confirmation button except sets the inner value to `False`
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.grey)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
 
-        await self.message.edit("Finished the session", view=None)
+        await self.message.edit(content="Finished the session", view=None)
         await interaction.response.send_message("I will stop the response for you", ephemeral=self.modal.private)
 
     async def on_timeout(self):
