@@ -5,7 +5,6 @@ from typing import Any
 
 import discord
 from discord.ext import commands
-from dotenv import load_dotenv
 
 from cogs import EXTENSIONS
 
@@ -40,9 +39,6 @@ class ApiBot(commands.Bot):
         print("Bot Booted up properly :)")
 
 
-
-load_dotenv()
-# something cool is that you can pass filenames into here.
 
 bot = ApiBot(command_prefix=commands.when_mentioned_or("a$"), intents=discord.Intents.all())
 
