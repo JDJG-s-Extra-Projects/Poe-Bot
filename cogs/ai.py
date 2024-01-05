@@ -64,9 +64,10 @@ class Ai(commands.Cog):
         return await asyncio.to_thread(self.ask, bot, question)
 
     @app_commands.command(description="Talk to AI", name="talk")
-    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str], private : bool):
+    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str], private : typing.Optional[bool]):
 
         bots = self.free_bots
+        private = private or True
 
         if not bot:
             return await interaction.response.send_message(content="Please choose a bot", ephemeral=True)
