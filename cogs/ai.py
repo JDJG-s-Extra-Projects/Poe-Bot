@@ -64,7 +64,7 @@ class Ai(commands.Cog):
         return await asyncio.to_thread(self.ask, bot, question)
 
     @app_commands.command(description="Talk to AI", name="talk")
-    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str], private: bool):
+    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str]):
 
         bots = self.free_bots
 
