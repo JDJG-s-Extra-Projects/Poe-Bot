@@ -64,7 +64,7 @@ class Ai(commands.Cog):
         return await asyncio.to_thread(self.ask, bot, question)
 
     @app_commands.command(description="Talk to AI", name="talk")
-    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str]):
+    async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str], private : bool):
 
         bots = self.free_bots
 
@@ -76,6 +76,7 @@ class Ai(commands.Cog):
             return await interaction.response.send_message(content="The bot you looked up was not found", ephemeral=True)
 
         modal = utils.ServiceAsk(bot, self.ask_question, utils.ServiceAsk)
+        modal.private = private
 
         await interaction.response.send_modal(modal)
 
