@@ -20,7 +20,7 @@ class Confirm(discord.ui.View):
     # This one is similar to the confirmation button except sets the inner value to `False`
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.grey)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
-        await interaction.response.send_message("I will stop the response for you", ephemeral=True)
+        await interaction.response.send_message("I will stop the response for you", ephemeral=self.modal)
 
         # edit message to remove the buttons
 
@@ -40,13 +40,14 @@ class Confirm(discord.ui.View):
 class ServiceAsk(ui.Modal, title="Questionnaire Response"):
     question = ui.TextInput(label="Ask your Question", style=discord.TextStyle.paragraph)
 
-    def __init__(self, ask_question, ai_client, child, **kwargs):
+    def __init__(self, ask_question, ai_client, child, private, **kwargs):
 
         self.ai_client = ai_client
         self.service = ask_question
 
-        self.args = (ask_question, ai_client, child)
+        self.args = (ask_question, ai_client, child, private)
         self.child = child
+        self.private = private
 
         super().__init__(**kwargs)
 
@@ -63,7 +64,7 @@ class ServiceAsk(ui.Modal, title="Questionnaire Response"):
         pages = pag.pages
 
         for page in pages:
-            await interaction.followup.send(content=page, ephemeral=True)
+            await interaction.followup.send(content=page, ephemeral=self.private)
 
         modal = self.child(*self.args)
         view = Confirm(interaction.user, modal)

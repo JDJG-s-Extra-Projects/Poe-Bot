@@ -76,8 +76,7 @@ class Ai(commands.Cog):
 
             return await interaction.response.send_message(content="The bot you looked up was not found", ephemeral=True)
 
-        modal = utils.ServiceAsk(bot, self.ask_question, utils.ServiceAsk)
-        modal.private = private
+        modal = utils.ServiceAsk(bot, self.ask_question, utils.ServiceAsk, private)
 
         await interaction.response.send_modal(modal)
 
