@@ -19,7 +19,7 @@ class Confirm(discord.ui.View):
     # This one is similar to the confirmation button except sets the inner value to `False`
     @discord.ui.button(label="Cancel", style=discord.ButtonStyle.grey)
     async def cancel(self, interaction: discord.Interaction, button: discord.ui.Button):
-        
+
         await self.message.edit("Finished the session", view=None)
         await interaction.response.send_message("I will stop the response for you", ephemeral=self.modal.private)
 
@@ -29,7 +29,7 @@ class Confirm(discord.ui.View):
     async def interaction_check(self, interaction):
 
         if interaction.user != self.user:
-            await interaction.response.send_message("You can't do that")
+            await interaction.response.send_message("You can't do that", ephemeral=True)
             return False
 
         else:
