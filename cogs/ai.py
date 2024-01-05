@@ -65,7 +65,8 @@ class Ai(commands.Cog):
 
     @app_commands.command(description="Talk to AI", name="talk")
     async def talk(self, interaction: discord.Interaction, bot: typing.Optional[str], private : typing.Optional[bool]):
-
+        
+        print(private)
         bots = self.free_bots
         private = private or True
 
