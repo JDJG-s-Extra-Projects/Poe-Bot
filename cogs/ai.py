@@ -70,7 +70,9 @@ class Ai(commands.Cog):
         bots = self.free_bots
         if private is None:
             private = True
-            print("changed it for you boss.")
+
+        # private = private or True doesn't work
+        # this is because private would be False then so not a good thing.
 
         if not bot:
             return await interaction.response.send_message(content="Please choose a bot", ephemeral=True)
