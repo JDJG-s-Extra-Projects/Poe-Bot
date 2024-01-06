@@ -63,6 +63,7 @@ class ServiceAsk(ui.Modal, title="Questionnaire Response"):
         pages = pag.pages
 
         for page in pages:
+            page = page.replace("\n", "")
             await interaction.followup.send(content=page, ephemeral=self.private)
 
         modal = self.child(*self.args)
